@@ -831,7 +831,13 @@ namespace e57
       const double pointRangeMin = data3DHeader.pointFields.pointRangeMinimum;
       const double pointRangeMax = data3DHeader.pointFields.pointRangeMaximum;
 
-      const auto getPointProto = [=]() -> Node {
+      const auto getPointProto =
+#if ( ( defined( _MSVC_LANG ) && _MSVC_LANG >= 202002L ) || __cplusplus >= 202002L )
+         [=, this]() -> Node
+#else
+         [=]() -> Node
+#endif
+      {
          switch ( data3DHeader.pointFields.pointRangeNodeType )
          {
             case NumericalNodeType::Integer:
@@ -900,7 +906,13 @@ namespace e57
       const double angleMin = data3DHeader.pointFields.angleMinimum;
       const double angleMax = data3DHeader.pointFields.angleMaximum;
 
-      const auto getAngleProto = [=]() -> Node {
+      const auto getAngleProto =
+#if ( ( defined( _MSVC_LANG ) && _MSVC_LANG >= 202002L ) || __cplusplus >= 202002L )
+         [=, this]() -> Node
+#else
+         [=]() -> Node
+#endif
+      {
          switch ( data3DHeader.pointFields.angleNodeType )
          {
             case NumericalNodeType::Integer:
